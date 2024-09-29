@@ -4,7 +4,7 @@ const path = require("path");
 const storage = multer.memoryStorage();
 const multerUploads = multer({
   storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10 MB limit
+  limits: { fileSize: 1 * 1024 * 1024 }, // 10 MB limit
   fileFilter: (req, file, cb) => {
     if (file.mimetype.startsWith("image/")) {
       cb(null, true);

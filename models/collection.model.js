@@ -20,7 +20,7 @@ const collectionSchema = mongoose.Schema(
           required: [true, "Please provide a header"],
           trim: true,
         },
-        comtact: {
+        contact: {
           type: String,
           trim: true,
         },
