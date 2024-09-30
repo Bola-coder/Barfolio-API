@@ -66,9 +66,9 @@ const signup = catchAsync(async (req, res, next) => {
     .cookie("token", token, {
       httpOnly: true,
       maxAge: 30 * 24 * 60 * 60 * 1000,
-      secure: false,
-      // secure: req.secure || req.headers["x-forwarded-proto"] === "https",
-      // sameSite: "None",
+      // secure: false,
+      secure: req.secure || req.headers["x-forwarded-proto"] === "https",
+      sameSite: "None",
     })
     .status(200)
     .json({
@@ -89,7 +89,7 @@ const login = catchAsync(async (req, res, next) => {
 
   // Fetching user from db based on email
   const user = await getUserByEmail(email).select("+password");
-  // console.log(user);
+  console.log(user);
 
   //   Checking if user exist and if password is the same with the hashed one
   if (!user || !(await user.confirmPassword(password, user.password))) {
@@ -102,9 +102,9 @@ const login = catchAsync(async (req, res, next) => {
     .cookie("token", token, {
       httpOnly: true,
       maxAge: 24 * 24 * 60 * 60 * 1000,
-      secure: false,
-      // secure: req.secure || req.headers["x-forwarded-proto"] === "https",
-      // sameSite: "None",
+      // secure: false,
+      secure: req.secure || req.headers["x-forwarded-proto"] === "https",
+      sameSite: "None",
     })
     .status(200)
     .json({
