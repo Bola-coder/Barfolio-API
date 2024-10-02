@@ -62,11 +62,19 @@ const signup = catchAsync(async (req, res, next) => {
   });
 
   const token = signJWTToken(newUser._id);
-  res.status(200).json({
-    status: "success",
-    token,
-    data: user,
-  });
+  res
+    .cookie("token", token, {
+      // httpOnly: true,
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      // secure: false,
+      secure: req.secure || req.headers["x-forwarded-proto"] === "https",
+      sameSite: "None",
+    })
+    .status(200)
+    .json({
+      status: "success",
+      data: user,
+    });
 });
 
 // Login function
@@ -90,11 +98,19 @@ const login = catchAsync(async (req, res, next) => {
   }
 
   const token = signJWTToken(user._id);
-  res.status(200).json({
-    status: "success",
-    token,
-    data: user,
-  });
+  res
+    .cookie("token", token, {
+      // httpOnly: true,
+      maxAge: 24 * 24 * 60 * 60 * 1000,
+      // secure: false,
+      secure: req.secure || req.headers["x-forwarded-proto"] === "https",
+      sameSite: "None",
+    })
+    .status(200)
+    .json({
+      status: "success",
+      data: user,
+    });
 });
 
 // Resend Verification email
