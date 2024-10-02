@@ -19,6 +19,8 @@ app.use(
       "https://barfolio.vercel.app",
     ],
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: ["GET", "POST", "PATCH", "DELETE"],
   })
 );
 app.use(morgan("dev"));
