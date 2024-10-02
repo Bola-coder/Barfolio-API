@@ -13,7 +13,11 @@ const { cloudinaryConfig } = require("./utils/cloudinary");
 const app = express();
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://barfolio.netlify.app"],
+    origin: [
+      "http://localhost:5173",
+      "https://barfolio.netlify.app",
+      "https://barfolio.vercel.app/",
+    ],
     credentials: true,
   })
 );
