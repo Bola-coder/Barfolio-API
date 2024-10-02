@@ -16,7 +16,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://barfolio.netlify.app",
-      "https://barfolio.vercel.app/",
+      "https://barfolio.vercel.app",
     ],
     credentials: true,
   })
