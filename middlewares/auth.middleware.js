@@ -6,7 +6,6 @@ const AppError = require("../utils/AppError");
 
 // Protect route from unauthorised users function
 const protectRoute = catchAsync(async (req, res, next) => {
-  console.log(req.headers.authorization);
   let token;
   if (
     req.headers.authorization &&
