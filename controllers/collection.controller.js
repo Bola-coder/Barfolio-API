@@ -7,6 +7,7 @@ const {
   getCollectionById,
   getCollectionByUserAndId,
   updateCollectionById,
+  deleteCollection,
 } = require("../repositories/collection");
 const { uploader } = require("../utils/cloudinary");
 const { dataUri } = require("../utils/multer");
@@ -191,6 +192,24 @@ const uploadImageForACollectionLink = catchAsync(async (req, res, next) => {
   });
 });
 
+const deleteCollectionByOwner = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  const userId = req.user.id;
+
+  const collection = await getCollectionByUserAndId(userId, id);
+
+  if (!collection) {
+    return next(new AppError("Collection not found", 404));
+  }
+
+  await deleteCollection(id);
+
+  res.status(200).json({
+    status: "success",
+    message: "Collection deleted successfully",
+  });
+});
+
 module.exports = {
   createCollection,
   getAllCollections,
@@ -198,4 +217,5 @@ module.exports = {
   updateCollection,
   getPublicPublicCollectionDetails,
   uploadImageForACollectionLink,
+  deleteCollectionByOwner,
 };

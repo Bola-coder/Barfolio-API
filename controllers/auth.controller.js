@@ -52,14 +52,14 @@ const signup = catchAsync(async (req, res, next) => {
   }
 
   // Hash the verification token and save to the user data in the database
-  const hashedVerificationToken = createVerificationTokenAndSendToEmail(
-    req,
-    newUser
-  );
+  // const hashedVerificationToken = createVerificationTokenAndSendToEmail(
+  //   req,
+  //   newUser
+  // );
 
-  const user = await updateUserById(newUser._id, {
-    verificationToken: hashedVerificationToken,
-  });
+  // const user = await updateUserById(newUser._id, {
+  //   verificationToken: hashedVerificationToken,
+  // });
 
   const token = signJWTToken(newUser._id);
   res.status(200).json({

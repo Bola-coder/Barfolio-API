@@ -17,7 +17,11 @@ router
 router
   .route("/:id")
   .get(authMiddleware.protectRoute, collectionController.getCollectionDetails)
-  .patch(authMiddleware.protectRoute, collectionController.updateCollection);
+  .patch(authMiddleware.protectRoute, collectionController.updateCollection)
+  .delete(
+    authMiddleware.protectRoute,
+    collectionController.deleteCollectionByOwner
+  );
 
 router
   .route("/public/:id")
